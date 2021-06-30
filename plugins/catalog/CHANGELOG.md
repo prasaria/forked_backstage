@@ -1,5 +1,16 @@
 # @backstage/plugin-catalog
 
+## 0.6.5
+
+### Patch Changes
+
+- f423891ee: Fixed sizing of the System diagram when the rendered graph was wider than the container.
+- e19283b39: Get rid of flex console warning for IconLink
+- Updated dependencies
+  - @backstage/core-components@0.1.4
+  - @backstage/integration@0.5.7
+  - @backstage/catalog-client@0.3.15
+
 ## 0.6.4
 
 ### Patch Changes

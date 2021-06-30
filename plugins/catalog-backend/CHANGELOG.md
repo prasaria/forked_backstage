@@ -1,5 +1,80 @@
 # @backstage/plugin-catalog-backend
 
+## 0.11.0
+
+### Minor Changes
+
+- 8e533f92c: Move `LdapOrgReaderProcessor` from `@backstage/plugin-catalog-backend`
+  to `@backstage/plugin-catalog-backend-module-ldap`.
+
+  The `LdapOrgReaderProcessor` isn't registered by default anymore, if
+  you want to continue using it you have to register it manually at the catalog
+  builder:
+
+  1. Add dependency to `@backstage/plugin-catalog-backend-module-ldap` to the `package.json` of your backend.
+  2. Add the processor to the catalog builder:
+
+  ```typescript
+  // packages/backend/src/plugins/catalog.ts
+  builder.addProcessor(
+    LdapOrgReaderProcessor.fromConfig(config, {
+      logger,
+    }),
+  );
+  ```
+
+  For more configuration details, see the [README of the `@backstage/plugin-catalog-backend-module-ldap` package](https://github.com/backstage/backstage/blob/master/plugins/catalog-backend-module-ldap/README.md).
+
+### Patch Changes
+
+- 22a60518c: Support ingesting multiple GitHub organizations via a new `GithubMultiOrgReaderProcessor`.
+
+  This new processor handles namespacing created groups according to the org of the associated GitHub team to prevent potential name clashes between organizations. Be aware that this processor is considered alpha and may not be compatible with future org structures in the catalog.
+
+  NOTE: This processor only fully supports auth via GitHub Apps
+
+  To install this processor, import and add it as follows:
+
+  ```typescript
+  // Typically in packages/backend/src/plugins/catalog.ts
+  import { GithubMultiOrgReaderProcessor } from '@backstage/plugin-catalog-backend';
+  // ...
+  export default async function createPlugin(env: PluginEnvironment) {
+    const builder = new CatalogBuilder(env);
+    builder.addProcessor(
+      GithubMultiOrgReaderProcessor.fromConfig(env.config, {
+        logger: env.logger,
+      }),
+    );
+    // ...
+  }
+  ```
+
+  Configure in your `app-config.yaml` by pointing to your GitHub instance and optionally list which GitHub organizations you wish to import. You can also configure what namespace you want to set for teams from each org. If unspecified, the org name will be used as the namespace. If no organizations are listed, by default this processor will import from all organizations accessible by all configured GitHub Apps:
+
+  ```yaml
+  catalog:
+    locations:
+      - type: github-multi-org
+        target: https://github.myorg.com
+
+    processors:
+      githubMultiOrg:
+        orgs:
+          - name: fooOrg
+            groupNamespace: foo
+          - name: barOrg
+            groupNamespace: bar
+          - name: awesomeOrg
+          - name: anotherOrg
+  ```
+
+- aa2b15d9d: Ensure that emitted relations are deduplicated
+- Updated dependencies
+  - @backstage/backend-common@0.8.4
+  - @backstage/integration@0.5.7
+  - @backstage/catalog-client@0.3.15
+
 ## 0.10.4
 
 ### Patch Changes
