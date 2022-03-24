@@ -205,7 +205,7 @@ export function useGetEntities(
       name: string;
       queryParams: string;
     }>;
-  }, [catalogApi, entity, relationsType]);
+  }, [catalogApi, entity, relationsType, kinds, isGroup]);
 
   return {
     componentsWithCounters,
