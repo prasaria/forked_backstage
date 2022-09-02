@@ -1,5 +1,5 @@
 site_name: 'Example Documentation'
-repo_url: https://github.com/backstage/backstage
+repo_url: https://github.com/prasaria/forked_backstage
 edit_uri: edit/master/plugins/techdocs-backend/examples/documented-component/docs
 
 nav:
