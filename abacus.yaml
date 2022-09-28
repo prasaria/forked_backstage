@@ -1,0 +1,38 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: abacus
+  description: Abacus is a point management service.
+  labels:
+    cloud: AWS
+    techFamily: Rewards
+    criticality: critical
+  annotations:
+    jira.grab.com/project-key: Unknown
+    helix.engtools.net/code-base: >-
+      {"Abacus
+      Service":"https://gitlab.myteksi.net/gophers/go/tree/master/rewards/abacus"}
+    helix.engtools.net/datadog-dashboards: >-
+      {"Abacus
+      Dashboard":"https://app.datadoghq.com/dashboard/4w3-9qw-sj5/abacus","Autodash
+      Dashboard":"https://app.datadoghq.com/dashboard/jcw-pre-f73"}
+    helix.engtools.net/gandalf: https://gandalf-ui.stg-myteksi.com/service-dashboard/abacus
+    helix.engtools.net/locations: Singapore
+    helix.engtools.net/mailing-list: tech.rewards@grabtaxi.com
+    helix.engtools.net/runbook: https://wiki.grab.com/display/SRE/Abacus+runbook
+    helix.engtools.net/service-wiki: https://wiki.grab.com/display/REW/Abacus
+    temporary.helix.engtools.net/change-log: ''
+    temporary.helix.engtools.net/ldap: Engineering-abacus
+    temporary.helix.engtools.net/legacy-service-key: abacus
+    temporary.helix.engtools.net/legacy-service-name: abacus
+    temporary.helix.engtools.net/oncall-tag: '@oncall-abacus'
+    temporary.helix.engtools.net/pagerduty: Rewards
+    temporary.helix.engtools.net/pagerduty-settings: '{"datadogIntegration":"Rewards","service":"Abacus","team":"Rewards"}'
+    temporary.helix.engtools.net/service-slack: '#abacus-engineering'
+    temporary.helix.engtools.net/ucm-config: ''
+  tags:
+    - golang
+spec:
+  type: service
+  lifecycle: production
+  owner: Engineering-abacus
